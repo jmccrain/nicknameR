@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-nicknameR facilitates matching common English first names to common nicknames, a frequent problem when dealing with any name merging. The primary function returns a long or wide dataframe of names and nicknames. The function also allows on the fly formatting of the names.
+nicknameR facilitates matching common English first names to common nicknames, a frequent problem when dealing with any name merging. The primary function returns a long or wide dataframe of names and nicknames. The function also allows on the fly formatting of the names. There are 580 unique names and 671 unique nicknames in the data.
 
 The names data come from this GitHub repository: https://github.com/onyxrev/common_nickname_csv
 
@@ -33,7 +33,7 @@ devtools::install_github("jmccrain/nicknameR")
 
 ## Usage
 
-
+The function `nicknamer` results in a dataframe formatted base on the parameters `format`, `transform`, `reverse`, and `opt_function`.
 
 ```{r}
 library(nicknameR)
