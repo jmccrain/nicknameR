@@ -28,7 +28,7 @@ name. E.g.: "Alex" as a nickname will now be associated with "Alexander"
 and "Alexandra".}
 
 \item{opt_function}{Default is NULL. Allows the user to pass custom functions
-to the name and nickname columns, such as \code{\link{stringr::str_sub}} or
+to the name and nickname columns, such as \code{stringr::str_sub} or
 any user-written function that parses strings.}
 }
 \value{

@@ -17,8 +17,10 @@
 #'   name. E.g.: "Alex" as a nickname will now be associated with "Alexander"
 #'   and "Alexandra".
 #' @param opt_function Default is NULL. Allows the user to pass custom functions
-#'   to the name and nickname columns, such as \code{\link{stringr::str_sub}} or
+#'   to the name and nickname columns, such as \code{stringr::str_sub} or
 #'   any user-written function that parses strings.
+#'
+#' @importFrom dplyr "%>%"
 #'
 #' @return dataframe
 #'
@@ -81,10 +83,10 @@ nicknamer <- function(format = "long", transform = NULL, reverse = FALSE, opt_fu
   if(format == "wide") {
     # most is 16 names
     nicknames <- nicknames %>%
-      group_by(name) %>%
-      nest(data = nickname) %>%
-      unnest_wider(data) %>%
-      unnest_wider(nickname, names_sep = "_")
+      dplyr::group_by(name) %>%
+      tidyr::nest(data = nickname) %>%
+      tidyr::unnest_wider(data) %>%
+      tidyr::unnest_wider(nickname, names_sep = "_")
   }
 
   return(nicknames)

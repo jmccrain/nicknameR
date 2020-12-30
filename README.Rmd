@@ -1,0 +1,80 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# nicknameR
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+nicknameR facilitates matching common English first names to common nicknames, a frequent problem when dealing with any name merging. The primary function returns a long or wide dataframe of names and nicknames. The function also allows on the fly formatting of the names.
+
+The names data come from this GitHub repository: https://github.com/onyxrev/common_nickname_csv
+
+## Installation
+
+Install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("jmccrain/nicknameR")
+```
+
+## Usage
+
+
+
+```{r}
+library(nicknameR)
+
+# standard long dataframe
+names <- nicknamer()
+
+dplyr::glimpse(names)
+
+length(unique(names$name))
+length(unique(names$nickname))
+```
+
+The default output is a long dataframe, with one row per name-nickname combination. In other words, both names and nicknames will be duplicated in each column, such as Alex being a nickname for Alexander or Alexandra.
+
+Another option is to convert the output a wide format, using the `format` parameter. You can also transform the strings to either full uppercase or full lower case with `transform`.
+
+```{r}
+# wide dataframe transformed to lower case
+names.wide <- nicknamer(format="wide", transform = "to_lower")
+
+head(names.wide)
+```
+
+If you instead want to use the nicknames as the specific rows, you can set `reverse` to TRUE. Now there will be one row per *nickname*, so the name Alex will now have one row with two full names associated with it (Alexander and Alexandra). 
+
+```{r}
+# wide dataframe with nickname as the row
+names.wide <- nicknamer(format="wide", transform = "to_lower", reverse=T)
+
+```
+
+Finally, the `opt_function` parameter allows you to pass any custom function to resulting dataframe. This transforms each name and nickname column.:
+
+
+```{r, eval=F}
+# optional function applied to names:
+short.names <- nicknamer(
+  format="wide",
+  transform = "to_lower",
+  opt_function = function(x) { str_sub(x, 1, 3) }
+)
+```
+
